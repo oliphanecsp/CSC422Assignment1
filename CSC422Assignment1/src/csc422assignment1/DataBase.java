@@ -57,7 +57,7 @@ public class DataBase {
             }
             temporary[temporary.length - 1] = new Pet(name, age);
             this.pets = temporary;
-            System.out.print("(Please put a space between the age and name) "
+            System.out.print("(Please put a space between the name and age) "
                     + "\nadd pet (name, age): ");
             response = scnr.nextLine().split(" ");
             name = response[0].substring(0, 1).toUpperCase() + response[0].substring(1);
@@ -68,6 +68,52 @@ public class DataBase {
             }
         }
         System.out.println(numberOfPetsAdded + " pets added.");
+    }
+
+    /**
+     * updateAnExistingPet(). This method updates the name value and age value
+     * of the Pet object that is at the index, that is entered in the method, of
+     * the Pet[] pets array with the name value that is entered in the method
+     * and the age value that is entered in the method.
+     */
+    public void updateAnExistingPet() {
+        viewAllPets();
+        System.out.print("Enter the pet ID you want to update: ");
+        int petID = Integer.parseInt(scnr.nextLine());
+        System.out.println("\n(Please put a space between the name and age)"
+                + "\nEnter new name and new age: ");
+        String[] response = scnr.nextLine().split(" ");
+        System.out.println(this.pets[petID].getName() + " " + this.pets[petID].getAge()
+                + " changed to " + response[0] + " " + response[1] + ".");
+        this.pets[petID].setName(response[0]);
+        this.pets[petID].setAge(Integer.parseInt(response[1]));
+
+    }
+
+    /**
+     * removeAnExistingPet(). This method removes the Pet object that is at the
+     * index, that is entered in the method, of the Pet[] pets array from the
+     * Pet[] pets array.
+     */
+    public void removeAnExistingPet() {
+        viewAllPets();
+        System.out.print("Enter the pet ID to remove: ");
+        int petID = Integer.parseInt(scnr.nextLine());
+        Pet[] temporary = new Pet[this.pets.length - 1];
+        int temporaryIndex = 0;
+        int petsIndex = 0;
+        while (temporaryIndex < (pets.length - 1) || petsIndex < this.pets.length) {
+            if (petsIndex == petID) {
+                petsIndex++;
+            } else {
+                temporary[temporaryIndex] = pets[petsIndex];
+                temporaryIndex++;
+                petsIndex++;
+            }
+        }
+        System.out.println(this.pets[petID].getName() + " "
+                + this.pets[petID].getAge() + " is removed.");
+        this.pets = temporary;
     }
 
     /**

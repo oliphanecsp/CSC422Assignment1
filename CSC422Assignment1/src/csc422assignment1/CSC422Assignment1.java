@@ -29,10 +29,11 @@ public class CSC422Assignment1 {
      */
     public void mainMenu() {
         System.out.println("What would you like to do?\n1) View all pets"
-                + "\n2) Add more pets\n3) Search pets by name"
-                + "\n4) Search pets by age\n5) Exit program\nYour choice:");
+                + "\n2) Add more pets\n3) Update an existing pet"
+                + "\n4) Remove an existing pet\n5) Search pets by name"
+                + "\n6) Search pets by age\n7) Exit program\nYour choice:");
         int optionChoice = Integer.parseInt(scnr.nextLine());
-        while (optionChoice != 5) {
+        while (optionChoice != 7) {
             switch (optionChoice) {
                 case 1:
                     tableData.viewAllPets();
@@ -41,17 +42,24 @@ public class CSC422Assignment1 {
                     tableData.addMorePets();
                     break;
                 case 3:
-                    tableData.searchPetsByName();
+                    tableData.updateAnExistingPet();
                     break;
                 case 4:
-                    tableData.searchPetsByAge();
+                    tableData.removeAnExistingPet();
                     break;
                 case 5:
+                    tableData.searchPetsByName();
+                    break;
+                case 6:
+                    tableData.searchPetsByAge();
+                    break;
+                case 7:
                     break;
             }
             System.out.println("What would you like to do?\n1) View all pets"
-                    + "\n2) Add more pets\n3) Search pets by name"
-                    + "\n4) Search pets by age\n5) Exit program\nYour choice:");
+                    + "\n2) Add more pets\n3) Update an existing pet"
+                    + "\n4) Remove an existing pet\n5) Search pets by name"
+                    + "\n6) Search pets by age\n7) Exit program\nYour choice:");
             optionChoice = Integer.parseInt(scnr.nextLine());
         }
 

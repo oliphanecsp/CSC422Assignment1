@@ -25,6 +25,24 @@ public class Pet {
     }
 
     /**
+     * setName(String name). This method sets the String name instance variable.
+     *
+     * @param name String
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
+     * setAge(int age). This method sets the int age instance variable.
+     *
+     * @param age int
+     */
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    /**
      * getName(). This method returns the String name instance variable.
      *
      * @return String
