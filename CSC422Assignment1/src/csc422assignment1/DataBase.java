@@ -70,4 +70,53 @@ public class DataBase {
         System.out.println(numberOfPetsAdded + " pets added.");
     }
 
+    /**
+     * searchPetsByName(). This method checks each Pet object in the Pet[] pets
+     * array to see if the Pet object's name value is equal to the name value
+     * that is entered in the method. If the Pet object's name value is equal to
+     * the name value that is entered in the method, the Pet object's name value
+     * and age value are displayed.
+     */
+    public void searchPetsByName() {
+        int numberOfPets = 0;
+        System.out.print("Enter a name to search:");
+        String name = scnr.nextLine();
+        System.out.println("+----------------------+"
+                + "\n| ID | NAME      | AGE |"
+                + "\n+----------------------+");
+        for (int i = 0; i < this.pets.length; i++) {
+            if (this.pets[i].getName().equals(name.substring(0, 1).toUpperCase() + name.substring(1))) {
+                System.out.printf("|%3s | %-10s|%4s |%n", i, this.pets[i].getName(), this.pets[i].getAge());
+                numberOfPets++;
+            }
+        }
+        System.out.println("+----------------------+"
+                + "\n" + numberOfPets + " rows in set.\n");
+
+    }
+
+    /**
+     * searchPetsByAge(). This method checks each Pet object in the Pet[] pets
+     * array to see if the Pet object's age value is equal to the age value that
+     * is entered in the method. If the Pet object's age value is equal to the
+     * age value that is entered in the method, the Pet object's name value and
+     * age value are displayed.
+     */
+    public void searchPetsByAge() {
+        int numberOfPets = 0;
+        System.out.print("Enter age to search:");
+        int age = Integer.parseInt(scnr.nextLine());
+        System.out.println("+----------------------+"
+                + "\n| ID | NAME      | AGE |"
+                + "\n+----------------------+");
+        for (int i = 0; i < this.pets.length; i++) {
+            if (this.pets[i].getAge() == age) {
+                System.out.printf("|%3s | %-10s|%4s |%n", i, this.pets[i].getName(), this.pets[i].getAge());
+                numberOfPets++;
+            }
+        }
+        System.out.println("+----------------------+"
+                + "\n" + numberOfPets + " rows in set.\n");
+    }
+
 }
