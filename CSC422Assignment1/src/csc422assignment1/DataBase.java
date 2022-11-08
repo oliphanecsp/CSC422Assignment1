@@ -4,17 +4,17 @@
  */
 package csc422assignment1;
 
+import java.io.Serializable;
 import java.util.Scanner;
 
 /**
  *
  * @author Eric Oliphant
  */
-public class DataBase {
+public class DataBase implements Serializable {
 
     //instance variables
     Pet[] pets = {};
-    Scanner scnr = new Scanner(System.in);
 
     /**
      * viewAllPets(). This method displays all of the pet names and ages of the
@@ -32,9 +32,11 @@ public class DataBase {
     }
 
     /**
-     * addMorePets(). This method adds pet objects to the Pet[] pets array.
+     * addMorePets().This method adds pet objects to the Pet[] pets array.
+     *
+     * @param scnr Scanner
      */
-    public void addMorePets() {
+    public void addMorePets(Scanner scnr) {
         int numberOfPetsAdded = 0;
         System.out.println("Enter 'done' when you are done entering pet names"
                 + "and ages.");
@@ -71,12 +73,14 @@ public class DataBase {
     }
 
     /**
-     * updateAnExistingPet(). This method updates the name value and age value
-     * of the Pet object that is at the index, that is entered in the method, of
+     * updateAnExistingPet().This method updates the name value and age value of
+     * the Pet object that is at the index, that is entered in the method, of
      * the Pet[] pets array with the name value that is entered in the method
      * and the age value that is entered in the method.
+     *
+     * @param scnr Scanner
      */
-    public void updateAnExistingPet() {
+    public void updateAnExistingPet(Scanner scnr) {
         viewAllPets();
         System.out.print("Enter the pet ID you want to update: ");
         int petID = Integer.parseInt(scnr.nextLine());
@@ -91,11 +95,13 @@ public class DataBase {
     }
 
     /**
-     * removeAnExistingPet(). This method removes the Pet object that is at the
+     * removeAnExistingPet().This method removes the Pet object that is at the
      * index, that is entered in the method, of the Pet[] pets array from the
      * Pet[] pets array.
+     *
+     * @param scnr Scanner
      */
-    public void removeAnExistingPet() {
+    public void removeAnExistingPet(Scanner scnr) {
         viewAllPets();
         System.out.print("Enter the pet ID to remove: ");
         int petID = Integer.parseInt(scnr.nextLine());
@@ -117,13 +123,15 @@ public class DataBase {
     }
 
     /**
-     * searchPetsByName(). This method checks each Pet object in the Pet[] pets
+     * searchPetsByName().This method checks each Pet object in the Pet[] pets
      * array to see if the Pet object's name value is equal to the name value
      * that is entered in the method. If the Pet object's name value is equal to
      * the name value that is entered in the method, the Pet object's name value
      * and age value are displayed.
+     *
+     * @param scnr Scanner
      */
-    public void searchPetsByName() {
+    public void searchPetsByName(Scanner scnr) {
         int numberOfPets = 0;
         System.out.print("Enter a name to search:");
         String name = scnr.nextLine();
@@ -142,13 +150,15 @@ public class DataBase {
     }
 
     /**
-     * searchPetsByAge(). This method checks each Pet object in the Pet[] pets
+     * searchPetsByAge().This method checks each Pet object in the Pet[] pets
      * array to see if the Pet object's age value is equal to the age value that
      * is entered in the method. If the Pet object's age value is equal to the
      * age value that is entered in the method, the Pet object's name value and
      * age value are displayed.
+     *
+     * @param scnr Scanner
      */
-    public void searchPetsByAge() {
+    public void searchPetsByAge(Scanner scnr) {
         int numberOfPets = 0;
         System.out.print("Enter age to search:");
         int age = Integer.parseInt(scnr.nextLine());

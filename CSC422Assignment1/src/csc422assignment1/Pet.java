@@ -3,11 +3,13 @@
  */
 package csc422assignment1;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Eric Oliphant
  */
-public class Pet {
+public class Pet implements Serializable {
 
     //instance variables
     private String name;
