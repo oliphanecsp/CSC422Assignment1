@@ -38,35 +38,75 @@ public class DataBase implements Serializable {
      */
     public void addMorePets(Scanner scnr) {
         int numberOfPetsAdded = 0;
-        System.out.println("Enter 'done' when you are done entering pet names"
-                + "and ages.");
-        System.out.print("(Please put a space between the age and name) "
-                + "\nadd pet (name, age): ");
-        String[] response = scnr.nextLine().split(" ");
-        String name = response[0].substring(0, 1).toUpperCase() + response[0].substring(1);
         int age = 0;
-        if (name.equals("Done")) {
-
-        } else {
-            age = Integer.parseInt(response[1]);
-        }
-        while (!(name.equals("Done"))) {
-            numberOfPetsAdded++;
-            int length = this.pets.length;
-            Pet[] temporary = new Pet[length + 1];
-            for (int i = 0; i < this.pets.length; i++) {
-                temporary[i] = this.pets[i];
-            }
-            temporary[temporary.length - 1] = new Pet(name, age);
-            this.pets = temporary;
-            System.out.print("(Please put a space between the name and age) "
-                    + "\nadd pet (name, age): ");
+        String name = "";
+        String[] response = {};
+        int errorCount = 0;
+        System.out.println("Enter 'done' when you are done entering pet names"
+                + " and ages.");
+        System.out.print("\n(Please put a space between the age and name) "
+                + "\nadd pet (name, age): ");
+        try {
             response = scnr.nextLine().split(" ");
             name = response[0].substring(0, 1).toUpperCase() + response[0].substring(1);
             if (name.equals("Done")) {
 
             } else {
+
                 age = Integer.parseInt(response[1]);
+            }
+        } catch (Exception e) {
+            System.out.print("Error: ");
+            for (Object input : response) {
+                System.out.print(input + " ");
+            }
+            System.out.println("is not a valid input.");
+            errorCount = 1;
+        }
+        while (!(name.equals("Done"))) {
+            try {
+                if ((age > 20 || age < 1)) {
+                    if (errorCount != 1) {
+                        System.out.println("Error: " + age + " is not a valid age.");
+                    }
+                } else if (pets.length >= 5 || pets.length < 0) {
+                    System.out.println("Error: Database is full.");
+                } else if ((response.length > 2 || (response.length == 1 && !(response[0].equals("done")))) && errorCount != 1) {
+                    System.out.print("Error: ");
+                    for (Object input : response) {
+                        System.out.print(input + " ");
+                    }
+                    System.out.println("is not a valid input.");
+                } else {
+                    numberOfPetsAdded++;
+                    int length = this.pets.length;
+                    Pet[] temporary = new Pet[length + 1];
+                    for (int i = 0; i < this.pets.length; i++) {
+                        temporary[i] = this.pets[i];
+                    }
+                    temporary[temporary.length - 1] = new Pet(name, age);
+                    this.pets = temporary;
+                }
+                errorCount = 0;
+                System.out.print("\n(Please put a space between the name and age) "
+                        + "\nadd pet (name, age): ");
+
+                response = scnr.nextLine().split(" ");
+                name = response[0].substring(0, 1).toUpperCase() + response[0].substring(1);
+                if (name.equals("Done")) {
+
+                } else {
+
+                    age = Integer.parseInt(response[1]);
+                }
+            } catch (Exception e) {
+                System.out.print("Error: ");
+                for (Object input : response) {
+                    System.out.print(input + " ");
+                }
+                System.out.println("is not a valid input.");
+                errorCount = 1;
+                age = 0;
             }
         }
         System.out.println(numberOfPetsAdded + " pets added.");
@@ -105,21 +145,25 @@ public class DataBase implements Serializable {
         viewAllPets();
         System.out.print("Enter the pet ID to remove: ");
         int petID = Integer.parseInt(scnr.nextLine());
-        Pet[] temporary = new Pet[this.pets.length - 1];
-        int temporaryIndex = 0;
-        int petsIndex = 0;
-        while (temporaryIndex < (pets.length - 1) || petsIndex < this.pets.length) {
-            if (petsIndex == petID) {
-                petsIndex++;
-            } else {
-                temporary[temporaryIndex] = pets[petsIndex];
-                temporaryIndex++;
-                petsIndex++;
+        if (petID > pets.length - 1 || petID < 0) {
+            System.out.println("Error: ID " + petID + " does not exist.\n");
+        } else {
+            Pet[] temporary = new Pet[this.pets.length - 1];
+            int temporaryIndex = 0;
+            int petsIndex = 0;
+            while (temporaryIndex < (pets.length - 1) || petsIndex < this.pets.length) {
+                if (petsIndex == petID) {
+                    petsIndex++;
+                } else {
+                    temporary[temporaryIndex] = pets[petsIndex];
+                    temporaryIndex++;
+                    petsIndex++;
+                }
             }
+            System.out.println(this.pets[petID].getName() + " "
+                    + this.pets[petID].getAge() + " is removed.\n");
+            this.pets = temporary;
         }
-        System.out.println(this.pets[petID].getName() + " "
-                + this.pets[petID].getAge() + " is removed.");
-        this.pets = temporary;
     }
 
     /**
